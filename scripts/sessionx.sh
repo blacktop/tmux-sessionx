@@ -206,7 +206,7 @@ handle_args() {
 		--preview-window="${preview_location},${preview_ratio},,"
 		--layout="$layout_mode"
 		--pointer="$pointer_icon"
-		-p "$window_width,$window_height"
+		--tmux "$window_width,$window_height"
 		--prompt "$prompt_icon"
 		--print-query
 		--tac
@@ -231,7 +231,8 @@ run_plugin() {
 	window_settings
 	handle_binds
 	handle_args
-	RESULT=$(echo -e "${INPUT}" | sed -E 's/✗/ /g' | fzf-tmux "${fzf_opts[@]}" "${args[@]}" | tail -n1)
+
+	RESULT=$(echo -e "${INPUT}" | sed -E 's/✗/ /g' | fzf "${fzf_opts[@]}" "${args[@]}" | tail -n1)
 }
 
 run_plugin
